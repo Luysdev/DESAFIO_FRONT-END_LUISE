@@ -5,6 +5,7 @@ class RequestPositionUser {
         return new Promise((resolve, reject) => {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
+
                     const latitude = position.latitude;
                     resolve(latitude);
                 },
@@ -14,6 +15,7 @@ class RequestPositionUser {
         return new Promise((resolve, reject) => {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
+
                     const longitude = position.longitude;
                     resolve(longitude);
                 },

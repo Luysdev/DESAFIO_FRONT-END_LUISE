@@ -62,6 +62,8 @@ const ClimaPage = () => {
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=b25383213542d0c393be71270857b743`;
 
     useEffect(() => {
+
+
         const fetchClima = async () : Promise<void> => {
             try {
                 const response  = await axios.get(url);
@@ -93,19 +95,12 @@ const ClimaPage = () => {
                 console.error('Erro ao buscar dados do clima:', error);
             }
         };
-
-        const getCoordenadas = async () : Promise<void> => {
-            try {
-                const latitudeResponse = await RequestPositionUser.getLatitudeApi();
-                const longitudeResponse = await RequestPositionUser.getLongitude();
-                setLatitude(latitudeResponse);
-                setLongitude(longitudeResponse);
-            } catch (error) {
-                console.error('Erro ao buscar coordenadas:', error);
-            }
-        };
-
-        getCoordenadas();
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition((position) =>{
+                setLatitude(position.coords.latitude);
+                setLongitude(position.coords.longitude);
+            });
+        }
         fetchClima();
     }, [url]);
 
