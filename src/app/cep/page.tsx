@@ -7,13 +7,14 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 const CepPage = () =>{
 
 
+
     const [rua, setRua] = useState<string>('')
     const [infoCep, setInfoCep] = useState<any[]>([{
     }])
 
 
-    const procuraPorRua = async () => {
-        await axios.get(`https://cep.la/${rua}`, {
+    const procuraRua = async () => {
+        await axios.get(`http://cep.la/${rua}`, {
             headers: {
                 'Accept': 'application/json'
             }
@@ -32,14 +33,15 @@ const CepPage = () =>{
     };
     const handleKeyDown = (e: { key: string; }) => {
         if (e.key === 'Enter') {
+            procuraRua()
             console.log('do validate');
-            procuraPorRua()
+
 
         }
     }
 
     return(
-
+        //Access-Control-Allow-Methods
         <div className={"w-screen h-screen flex items-center justify-end bg-image-cep  min-h-screen bg-cover bg-center "} >
             <div className={"w-10 h-10 bg-neutral-100 rounded-full flex items-center justify-center absolute top-5 left-5  shadow-2xl "}>
                 <Link href={"/"}><AiOutlineArrowLeft/></Link>
