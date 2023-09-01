@@ -6,11 +6,14 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 
 const CepPage = () =>{
 
+
     const [rua, setRua] = useState<string>('')
     const [infoCep, setInfoCep] = useState<any[]>([{
     }])
-    const procuraPorRua = () => {
-        axios.get(`http://cep.la/${rua}`, {
+
+
+      const procuraPorRua = async () => {
+         await axios.get(`http://cep.la/${rua}`, {
             headers: {
                 'Accept': 'application/json'
             }
@@ -18,7 +21,6 @@ const CepPage = () =>{
             .then(response => {
                 console.log(response.data)
                 setInfoCep(response.data)
-
 
             })
             .catch(error => {
@@ -33,6 +35,7 @@ const CepPage = () =>{
         if (e.key === 'Enter') {
             console.log('do validate');
             procuraPorRua()
+
         }
     }
 

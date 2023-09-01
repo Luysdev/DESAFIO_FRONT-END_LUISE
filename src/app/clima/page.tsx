@@ -106,6 +106,7 @@ const ClimaPage = () => {
 
 
     return (
+
         <div className="min-h-screen  flex justify-center items-center  flex-col" style={{ backgroundImage: backGroundImage, backgroundSize: 'cover', transition: 'background-image 0.5s' }}>
             <div className={"w-10 h-10 bg-neutral-100 rounded-full flex items-center justify-center absolute top-5 left-5 shadow-2xl "}>
                 <Link className={""} href={"/"}><AiOutlineArrowLeft/></Link>
