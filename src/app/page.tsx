@@ -1,6 +1,6 @@
 import Link from "next/link";
 import  {FiSun} from  "react-icons/fi";
-import {AiOutlineException} from "react-icons/Ai"
+import {AiOutlineException} from "react-icons/ai"
 
 export default function Home() {
   return (
