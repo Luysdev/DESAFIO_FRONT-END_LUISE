@@ -63,7 +63,6 @@ const ClimaPage = () => {
 
     useEffect(() => {
 
-
         const fetchClima = async () : Promise<void> => {
             try {
                 const response  = await axios.get(url);
