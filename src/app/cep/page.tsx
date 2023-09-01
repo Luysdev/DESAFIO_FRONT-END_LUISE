@@ -2,7 +2,7 @@
 import axios from "axios";
 import Link from "next/link";
 import React, {useState} from "react";
-import { AiOutlineArrowLeft } from "react-icons/Ai";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 
 const CepPage = () =>{
 

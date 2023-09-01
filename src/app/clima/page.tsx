@@ -4,7 +4,7 @@ import axios from 'axios';
 import RequestPositionUser from '@/classes/RequestPositionUser';
 import {FaTemperatureLow, FaTemperatureHigh, FaWind } from "react-icons/fa";
 import {WiHumidity } from "react-icons/wi";
-import {AiFillEyeInvisible, AiOutlineArrowLeft} from "react-icons/Ai";
+import {AiFillEyeInvisible, AiOutlineArrowLeft} from "react-icons/ai";
 import { RiThunderstormsLine, RiDrizzleLine, RiRainyLine, RiSnowyLine, RiSunLine, RiCloudyLine } from 'react-icons/ri';
 import Link from 'next/link';
 
@@ -43,7 +43,7 @@ const ClimaPage = () => {
         timezone : false,
         name: ''
     });
-    let mainClimaPlanoDeFundo  = {
+    let mainClimaPlanoDeFundo : any  = {
         ThunderStorm: 'https://static.vecteezy.com/ti/fotos-gratis/p1/5131507-fundo-da-escuridao-ceu-enquanto-tempestade-esta-chegando-gratis-foto.jpg',
         Drizzle : 'https://wallpapercave.com/wp/Z0kmvgB.jpg',
         Rain : 'https://www.itl.cat/pngfile/big/15-153493_rain-wallpaper-rain-at-night.jpg',
@@ -51,7 +51,7 @@ const ClimaPage = () => {
         Clouds: 'https://static.vecteezy.com/system/resources/previews/016/655/386/large_2x/sky-background-nature-sky-blue-background-cloud-light-summer-day-sunny-weather-space-clear-sun-white-high-beautiful-landscape-outdoors-sunlight-cloudy-outdoor-abstract-wallpaper-free-photo.jpg',
         Clear : 'https://static.vecteezy.com/ti/fotos-gratis/p1/15234388-fundo-do-ceu-ceu-azul-limpo-e-nuvens-brancas-fundo-do-ceu-com-espaco-para-decoracao-e-usado-para-fazer-papel-de-parede-ou-trazer-para-o-trabalho-em-design-grafico-gratis-foto.jpg)'
     };
-    const ClimaIcons = {
+    const ClimaIcons : any = {
         Thunderstorm: <RiThunderstormsLine />,
         Drizzle: <RiDrizzleLine />,
         Rain: <RiRainyLine />,
@@ -80,19 +80,15 @@ const ClimaPage = () => {
                     temp_max: weatherData.main.temp_max - 273,
                     visibilidade: weatherData.visibility,
                     wind_speed: weatherData.wind.speed,
-                    url: '',
                     timezone : isNight,
                     name: weatherData.name
                 });
-
-                // @ts-ignore
-                if (mainClimaPlanoDeFundo[weatherData.weather[0].main] ) {
+                if (clima.timezone) {
+                    setBackGroundImage(`url("https://cdn.wallpapersafari.com/72/13/HDLsvt.jpg")`)
+                }else if(mainClimaPlanoDeFundo[weatherData.weather[0].main] ){
                     setBackGroundImage(`url("${mainClimaPlanoDeFundo[weatherData.weather[0].main]}")`);
-                    if (clima.timezone) {
-                        setBackGroundImage(`url("https://cdn.wallpapersafari.com/72/13/HDLsvt.jpg")`)
-                    }
-
                 }
+
             } catch (error) {
                 console.error('Erro ao buscar dados do clima:', error);
             }
@@ -113,14 +109,14 @@ const ClimaPage = () => {
         fetchClima();
     }, [url]);
 
-    // @ts-ignore
+
     return (
         <div className="min-h-screen  flex justify-center items-center  flex-col" style={{ backgroundImage: backGroundImage, backgroundSize: 'cover', transition: 'background-image 0.5s' }}>
             <div className={"w-10 h-10 bg-neutral-100 rounded-full flex items-center justify-center absolute top-5 left-5 shadow-2xl "}>
                 <Link className={""} href={"/"}><AiOutlineArrowLeft/></Link>
             </div>
 
-            <h1 className={"text-6xl  text-gray-200 "}> {ClimaIcons[clima.main]} {clima.name} {(clima.temp.toFixed(0))}°C </h1>
+            <h1 className={"text-6xl  text-gray-200 "}> {ClimaIcons[clima.main]  } {clima.name} {(clima.temp.toFixed(0))}°C </h1>
             <div className={"w-[1000px] h-[600px] rounded-3xl shadow-2xl "}>
                 <div className={" flex  justify-around p-20  "}>
                     <div  className={" bg-neutral-300  rounded-3xl w-40 h-20  shadow-2xl "}>

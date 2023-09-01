@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useForm} from "react-hook-form";
-import { AiOutlineArrowLeft } from "react-icons/Ai";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 
 const FormPage = () => {
 
