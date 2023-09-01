@@ -13,7 +13,7 @@ const CepPage = () =>{
 
 
       const procuraPorRua = async () => {
-         await axios.get(`http://cep.la/${rua}`, {
+         await axios.get(`https://cep.la/${rua}`, {
             headers: {
                 'Accept': 'application/json'
             }
@@ -60,6 +60,7 @@ const CepPage = () =>{
                             )
                         ))}
                 </div>
+
             </div>
 
         </div>
