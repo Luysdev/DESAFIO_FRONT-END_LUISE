@@ -29,6 +29,7 @@ const CepPage = () =>{
 
 
     const handleChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+        // @ts-ignore
         setRua(e.target.value);
     };
 
