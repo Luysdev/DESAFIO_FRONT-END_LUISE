@@ -12,16 +12,15 @@ const CepPage = () =>{
     }])
 
 
-      const procuraPorRua = async () => {
-         await axios.get(`https://cep.la/${rua}`, {
+    const procuraPorRua = async () => {
+        await axios.get(`https://cep.la/${rua}`, {
             headers: {
                 'Accept': 'application/json'
             }
         })
             .then(response => {
-                console.log(response.data)
-                setInfoCep(response.data)
-
+                console.log(response.data);
+                setInfoCep(response.data);
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
