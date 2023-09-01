@@ -4,8 +4,9 @@ import axios from 'axios';
 import RequestPositionUser from '@/classes/RequestPositionUser';
 import {FaTemperatureLow, FaTemperatureHigh, FaWind } from "react-icons/fa";
 import {WiHumidity } from "react-icons/wi";
-import {AiFillEyeInvisible} from "react-icons/Ai";
+import {AiFillEyeInvisible, AiOutlineArrowLeft} from "react-icons/Ai";
 import { RiThunderstormsLine, RiDrizzleLine, RiRainyLine, RiSnowyLine, RiSunLine, RiCloudyLine } from 'react-icons/ri';
+import Link from 'next/link';
 
 
 interface typeClima {
@@ -19,8 +20,8 @@ interface typeClima {
     descricao: string;
     icon: string;
     wind_speed: number;
-
     timezone: boolean;
+    name: string
 }
 
 const ClimaPage = () => {
@@ -39,8 +40,8 @@ const ClimaPage = () => {
         temp_max: 0,
         visibilidade: 0,
         wind_speed: 0,
-
-        timezone : false
+        timezone : false,
+        name: ''
     });
     let mainClimaPlanoDeFundo  = {
         ThunderStorm: 'https://static.vecteezy.com/ti/fotos-gratis/p1/5131507-fundo-da-escuridao-ceu-enquanto-tempestade-esta-chegando-gratis-foto.jpg',
@@ -80,9 +81,9 @@ const ClimaPage = () => {
                     visibilidade: weatherData.visibility,
                     wind_speed: weatherData.wind.speed,
                     url: '',
-                    timezone : isNight
+                    timezone : isNight,
+                    name: weatherData.name
                 });
-
 
                 // @ts-ignore
                 if (mainClimaPlanoDeFundo[weatherData.weather[0].main] ) {
@@ -114,32 +115,31 @@ const ClimaPage = () => {
 
     // @ts-ignore
     return (
-        <div className="min-h-screen flex justify-center items-center " style={{ backgroundImage: backGroundImage, backgroundSize: 'cover', transition: 'background-image 0.5s' }}>
-            <h1 className={"text-6xl mb-[300px] text-gray-200 "}> {ClimaIcons[clima.main]} {(clima.temp.toFixed(0))}°C</h1>
-            <div className={"w-6/12  h-[500px] mt-96 absolute   rounded-3xl shadow-2xl "}>
-                <div className={"  ml-40 absolute"}>
-                    <div  className={" bg-neutral-300  rounded-3xl  w-64 h-48 m-20 shadow-2xl "}>
-                        <p className={"flex p-2 ml-2 "}> <FaTemperatureHigh/> Maxima: {clima.temp_max.toFixed(0)} </p>
-                        <p className={"flex p-2 ml-2 "}><FaTemperatureLow /> Minima: {clima.temp_min.toFixed(0)} </p>
-                    </div>
-                    <div  className={"bg-neutral-300 rounded-3xl  w-40 h-20 m-20 shadow-2xl flex items-center justify-center"}>
-                        <p > <WiHumidity/>  {clima.umidade}</p>
-                    </div>
-
-                </div>
-                <div className={"absolute  ml-40 "}>
-                    <div  className={" bg-neutral-300  rounded-3xl  mb-0 w-40 h-20 ml-[380px] mt-[80px] shadow-2xl  "}>
-                        <p className={"flex p-2 ml-2 "}> <AiFillEyeInvisible/> Visibilidade: {clima.visibilidade.toFixed(0)} </p>
-                    </div>
-                    <div  className={"bg-neutral-300 rounded-3xl w-40 h-20 m-20 shadow-2xl  ml-[380px] mt-[80px] flex items-center justify-center"}>
-                        <p > <FaWind/>  {clima.wind_speed}</p>
-                    </div>
-                </div>
-
-
+        <div className="min-h-screen  flex justify-center items-center  flex-col" style={{ backgroundImage: backGroundImage, backgroundSize: 'cover', transition: 'background-image 0.5s' }}>
+            <div className={"w-10 h-10 bg-neutral-100 rounded-full flex items-center justify-center absolute top-5 left-5 shadow-2xl "}>
+                <Link className={""} href={"/"}><AiOutlineArrowLeft/></Link>
             </div>
 
-
+            <h1 className={"text-6xl  text-gray-200 "}> {ClimaIcons[clima.main]} {clima.name} {(clima.temp.toFixed(0))}°C </h1>
+            <div className={"w-[1000px] h-[600px] rounded-3xl shadow-2xl "}>
+                <div className={" flex  justify-around p-20  "}>
+                    <div  className={" bg-neutral-300  rounded-3xl w-40 h-20  shadow-2xl "}>
+                        <p className={"flex p-2 ml-2 "}> <FaTemperatureHigh/> Maxima: {clima.temp_max.toFixed(0)} </p>
+                        <p className={"flex p-2 ml-2 "}><FaTemperatureLow/> Minima: {clima.temp_min.toFixed(0)} </p>
+                    </div>
+                    <div  className={"bg-neutral-300 rounded-3xl   w-40 h-20 shadow-2xl flex items-center justify-center"}>
+                        <p > <WiHumidity/>  {clima.umidade}</p>
+                    </div>
+                </div>
+                <div className={"flex  justify-around p-20 "}>
+                    <div  className={" bg-neutral-300  rounded-3xl w-40 h-20 shadow-2xl  "}>
+                        <p className={"flex p-2 ml-2 "}><AiFillEyeInvisible/> Visibilidade: {clima.visibilidade.toFixed(0)} </p>
+                    </div>
+                    <div  className={"bg-neutral-300 rounded-3xl w-40 h-20 shadow-2xl  flex items-center justify-center"}>
+                        <p ><FaWind/> {clima.wind_speed}</p>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };
